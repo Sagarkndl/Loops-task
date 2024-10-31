@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Calculations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            width: 300px;
+            text-align: center;
+        }
+        .container h2 {
+            color: #555;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 80%;
+        }
+        #output {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Factorial (N!) Calculation</h2>
+        <input type="number" id="factorialInput" placeholder="Enter N for Factorial">
+        <button onclick="calculateFactorial()">Calculate Factorial</button>
+        <div id="factorialOutput"></div>
+    </div>
+
+    <div class="container">
+        <h2>Sum of Digits from 1 to N</h2>
+        <input type="number" id="sumDigitsInput" placeholder="Enter N for Sum of Digits">
+        <button onclick="sumOfDigits()">Calculate Sum of Digits</button>
+        <div id="sumDigitsOutput"></div>
+    </div>
+
+    <div class="container">
+        <h2>Sum of Odd and Even Numbers up to N</h2>
+        <input type="number" id="sumOddEvenInput" placeholder="Enter N for Odd/Even Sums">
+        <button onclick="sumOfOddAndEven()">Calculate Odd/Even Sums</button>
+        <div id="sumOddEvenOutput"></div>
+    </div>
+
+    <script>
+        function calculateFactorial() {
+            let N = parseInt(document.getElementById('factorialInput').value);
+            if (N < 0) {
+                document.getElementById('factorialOutput').textContent = "Answer: Unspecified";
+                return;
+            }
+            let result = 1;
+            let i = 1;
+            while (i <= N) {
+                result *= i;
+                i++;
+            }
+            document.getElementById('factorialOutput').textContent = `Input: ${N}, Answer: ${result}`;
+        }
+        function sumOfDigits() {
+            let N = parseInt(document.getElementById('sumDigitsInput').value);
+            if (N < 1) {
+                document.getElementById('sumDigitsOutput').textContent = "Answer: Unspecified";
+                return;
+            }
+            let sum = 0;
+            let numbers = [];
+            for (let i = 1; i <= N; i++) {
+                numbers.push(i);
+            }
+            for (let num of numbers) {
+                sum += num;
+            }
+            document.getElementById('sumDigitsOutput').textContent = `Input: ${N}, Answer: ${sum}`;
+        }
+        function sumOfOddAndEven() {
+            let N = parseInt(document.getElementById('sumOddEvenInput').value);
+            if (N < 1) {
+                document.getElementById('sumOddEvenOutput').textContent = "Answer: Unspecified";
+                return;
+            }
+
+            let sumOdd = 0;
+            let sumEven = 0;
+            let numbers = {};
+            let i = 1;
+            do {
+                numbers[i] = i;
+                i++;
+            } while (i <= N);
+
+            // Calculate odd/even
+            for (let key in numbers) {
+                if (numbers[key] % 2 === 0) {
+                    sumEven += numbers[key];
+                } else {
+                    sumOdd += numbers[key];
+                }
+            }
+
+            document.getElementById('sumOddEvenOutput').textContent = `Input: ${N}, Sum of Odd = ${sumOdd}, Sum of Even = ${sumEven}`;
+        }
+    </script>
+
+</body>
+</html>
